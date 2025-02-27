@@ -154,3 +154,6 @@
     });
 
     console.log(`WebSocket server is running on port ${port}`);
+
+    // keep the server alive, even if no clients connect.
+    setInterval(() => console.log('Server is alive'), 10000);
