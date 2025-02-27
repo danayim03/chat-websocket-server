@@ -157,3 +157,12 @@
 
     // keep the server alive, even if no clients connect.
     setInterval(() => console.log('Server is alive'), 10000);
+
+    process.on('SIGTERM', () => {
+        console.log("Received SIGTERM. Gracefully shutting down.");
+        wss.close(() => {
+            console.log("WebSocket server closed.");
+            process.exit(0);
+        });
+    });
+
