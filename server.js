@@ -109,7 +109,20 @@
                 message: data.message
             }));
             }
-        } else if (data.type === 'endChat') {
+        }
+        
+        else if (data.type === 'typing') {
+            // Handle typing signal
+            const matchedWs = activeMatches.get(ws);
+            if (matchedWs && matchedWs.readyState === WebSocket.OPEN) {
+                matchedWs.send(JSON.stringify({
+                type: 'typing'
+                }));
+            }
+        }
+
+
+        else if (data.type === 'endChat') {
             const matchedWs = activeMatches.get(ws);
             
             if (matchedWs && matchedWs.readyState === WebSocket.OPEN) {
